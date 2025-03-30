@@ -70,7 +70,9 @@ pipeline {
       steps {     
         script {
           container('maven'){
-            sh 'maven --version'
+            sh """
+              maven --version
+            """
           }
         }
       }
