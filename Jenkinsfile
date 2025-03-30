@@ -67,7 +67,7 @@ pipeline {
     }
   }
   stages {
-    stage ('maven){
+    stage ('maven'){
       steps {     
         script {
           container('maven'){
