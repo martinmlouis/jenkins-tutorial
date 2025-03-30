@@ -12,9 +12,6 @@ properties([
           script: """
 import groovy.json.JsonSlurper
 import jenkins.model.*
-import jenkins.*
-import hudson.*
-import hudson.model.*
 
 // define website to collect releases
 def owner = "hashicorp"
