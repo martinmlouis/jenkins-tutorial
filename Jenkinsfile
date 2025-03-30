@@ -63,7 +63,6 @@ pipeline {
             - cat
             tty: true
         '''
-      retries 2
     }
   }
   stages {
