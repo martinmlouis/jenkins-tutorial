@@ -46,35 +46,55 @@ return tags
 pipeline {
   agent {
     kubernetes {
-      yaml '''
-        apiVersion: v1
-        kind: Pod
-        metadata:
-          labels:
-            some-label: some-label-value
-        spec:
-          containers:
-          - name: maven
-            image: maven:3.9.9-eclipse-temurin-17
-            command:
-            - cat
-            tty: true
-          - name: busybox
-            image: busybox
-            command:
-            - cat
-            tty: true
-        '''
+yaml """
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    purpose: echimp-cd-helm-pipeline
+spec:
+  restartPolicy: Never
+  containers:
+  ###########################################################################################
+  # For AWS CLI execution
+  ###########################################################################################
+  - name: kaniko
+    image: gcr.io/kaniko-project/executor:v1.6.0-debug
+    imagePullPolicy: Always
+    command: ['cat']
+    tty: true
+    volumeMounts:
+      - name: jenkins-docker-cfg
+        mountPath: /kaniko/.docker
+  volumes:
+  - name: jenkins-docker-cfg
+    emptyDir:
+      sizeLimit: 1G        
+      """
     }
   }
+  environment {
+    HARBOR_URL = 'harbor.10.0.0.127.nip.io:30003'
+    HARBOR_PROJECT_NAME = 'builds'
+    HARBOR_PACKER_REPO_LOCAL = 'packer'
+  }  
+  options {
+    //Requires ansiColor plugin
+    ansiColor('xterm')
+  }  
   stages {
-    stage ('maven'){
+    stage ('packer'){
       steps {     
         script {
-          container('maven'){
-            sh """
-              mvn --version
-            """
+          container('kaniko'){
+            // tag the helm chart with the chosen docker image
+            withCredentials([usernamePassword(credentialsId: 'harbor-cred', usernameVariable: 'HARBOR_USERNAME', passwordVariable: 'HARBOR_PASSWORD')]) {
+              sh """
+                packer_version=\$(echo ${params.PACKER_VERSION} |cut -dv -f2)
+                echo "{\\"auths\\":{\\"${HARBOR_URL}\\":{\\"username\\":\\"${HARBOR_USERNAME}\\",\\"password\\":\\"${HARBOR_PASSWORD}\\"}}}" > /kaniko/.docker/config.json
+                cat /kaniko/.docker/config.json
+                /kaniko/executor -f `pwd`/packer-Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=true --destination=${HARBOR_URL}/${HARBOR_PROJECT_NAME}${HARBOR_PACKER_REPO_LOCAL}:${params.PACKER_VERSION}
+              """
           }
         }
       }
