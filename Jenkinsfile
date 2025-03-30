@@ -63,6 +63,9 @@ spec:
     imagePullPolicy: Always
     command: ['cat']
     tty: true
+    env:
+      name: container
+      value: "docker"
     volumeMounts:
       - name: jenkins-docker-cfg
         mountPath: /kaniko/.docker
