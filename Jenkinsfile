@@ -39,7 +39,8 @@ return tags
    ]
   ]
 )]
-])             
+)]
+           
 pipeline {
   agent {
     kubernetes {
