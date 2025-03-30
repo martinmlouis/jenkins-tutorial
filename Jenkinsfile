@@ -17,10 +17,10 @@ import groovy.json.JsonSlurper
 // define website to collect releases
 def owner = "hashicorp"
 def repo = "packer"
-def apiUrl = "https://api.github.com/repos/${owner}/${repo}/releases"
+def apiUrl = "https://api.github.com/repos/\${owner}/\${repo}/releases"
 
 // send a curl command and collect the results
-def process = "curl -s ${apiUrl}".execute()
+def process = "curl -s \${apiUrl}".execute()
 def response = process.text
 
 def jsonSlurper = new JsonSlurper()
