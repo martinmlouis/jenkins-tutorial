@@ -64,7 +64,7 @@ spec:
     command: ['cat']
     tty: true
     env:
-      name: container
+    - name: container
       value: "docker"
     volumeMounts:
       - name: jenkins-docker-cfg
