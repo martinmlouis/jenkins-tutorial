@@ -38,8 +38,8 @@ return tags
     ]
    ]
   ]
-)]
-)]
+])
+])
            
 pipeline {
   agent {
