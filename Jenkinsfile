@@ -78,10 +78,7 @@ spec:
     HARBOR_PROJECT_NAME = 'builds'
     HARBOR_PACKER_REPO_LOCAL = 'packer'
   }  
-  options {
-    //Requires ansiColor plugin
-    ansiColor('xterm')
-  }  
+
   stages {
     stage ('packer'){
       steps {     
