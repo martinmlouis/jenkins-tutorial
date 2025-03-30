@@ -66,3 +66,4 @@ pipeline {
       retries 2
     }
   }
+}
