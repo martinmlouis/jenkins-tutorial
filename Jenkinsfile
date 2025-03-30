@@ -93,7 +93,7 @@ spec:
                 packer_version=\$(echo ${params.PACKER_VERSION} |cut -dv -f2)
                 echo "{\\"auths\\":{\\"${HARBOR_URL}\\":{\\"username\\":\\"${HARBOR_USERNAME}\\",\\"password\\":\\"${HARBOR_PASSWORD}\\"}}}" > /kaniko/.docker/config.json
                 cat /kaniko/.docker/config.json
-                /kaniko/executor -f `pwd`/packer-Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=true --destination=${HARBOR_URL}/${HARBOR_PROJECT_NAME}/${HARBOR_PACKER_REPO_LOCAL}:${params.PACKER_VERSION}
+                /kaniko/executor -f `pwd`/packer-Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=false --destination=${HARBOR_URL}/${HARBOR_PROJECT_NAME}/${HARBOR_PACKER_REPO_LOCAL}:${params.PACKER_VERSION}
               """
             }
           }
