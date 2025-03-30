@@ -66,4 +66,15 @@ pipeline {
       retries 2
     }
   }
+  stages {
+    stage ('maven){
+      steps {     
+        script {
+          container('maven'){
+            sh 'maven --version'
+          }
+        }
+      }
+    }
+  }
 }
