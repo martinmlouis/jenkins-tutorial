@@ -3,7 +3,7 @@ properties([
   [
       $class: 'ChoiceParameter',
       choiceType: 'PT_SINGLE_SELECT',
-      name: 'CHART_VERSION',
+      name: 'PACKER_VERSION',
       script: [
         $class: 'GroovyScript',
         script: [
