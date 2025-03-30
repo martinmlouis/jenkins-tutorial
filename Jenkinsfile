@@ -12,8 +12,6 @@ properties([
           script: """
 import jenkins.model.*
 import jenkins.*
-import hudson.*
-import hudson.model.*
 import groovy.json.JsonSlurper
 
 // define website to collect releases
