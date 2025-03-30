@@ -11,6 +11,7 @@ properties([
           sandbox: false,
           script: """
 import groovy.json.JsonSlurper
+import jenkins.model.jenkins
 
 // define website to collect releases
 def owner = "hashicorp"
