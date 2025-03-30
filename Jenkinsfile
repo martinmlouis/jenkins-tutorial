@@ -31,7 +31,7 @@ def tags = []
 if (releases) {
     tags = releases.collect { it.tag_name }
 } else {
-    return ["Error"]
+    return [Error]
 }
 
 return tags
@@ -72,7 +72,7 @@ pipeline {
         script {
           container('maven'){
             sh """
-              maven --version
+              mvn --version
             """
           }
         }
