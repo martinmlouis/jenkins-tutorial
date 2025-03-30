@@ -34,9 +34,12 @@ if (releases) {
 }
 
 return tags
-   """
+    """
+    ]
    ]
-]
+  ]
+)]
+])             
 pipeline {
   agent {
     kubernetes {
