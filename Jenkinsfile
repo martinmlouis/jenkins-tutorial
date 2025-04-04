@@ -63,6 +63,11 @@ spec:
     imagePullPolicy: Always
     command: ['cat']
     tty: true
+    resources:
+      requests:
+        memory: "2000Mi"
+      limits:
+        memory: "4000Mi"
     env:
     - name: container
       value: "docker"
