@@ -95,7 +95,7 @@ spec:
                 echo -n "{\\"auths\\":{\\"https://index.docker.io/v2/\\":{\\"auth\\":\\"\$(echo -n martinlourduswamy:Kandikuppam@123 | base64)\\"}}}" > /kaniko/.docker/config.json
                 cat /kaniko/.docker/config.json
                 #/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=false --destination=${HARBOR_URL}/${HARBOR_PROJECT_NAME}/mag-tools:latest
-                /kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=false --destination=docker.io/martinlourduswamy/mag-tools:latest
+                /kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=false --destination=martinlourduswamy/mag-tools:latest
               """
             }
           }
