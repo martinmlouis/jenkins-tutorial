@@ -59,7 +59,7 @@ spec:
   # For AWS CLI execution
   ###########################################################################################
   - name: kaniko
-    image: gcr.io/kaniko-project/executor:v1.14.0-debug
+    image: gcr.io/kaniko-project/executor:latest
     imagePullPolicy: Always
     command: ['cat']
     tty: true
@@ -92,7 +92,7 @@ spec:
               sh """
                 #packer_version=\$(echo ${params.PACKER_VERSION} |cut -dv -f2)
                 #echo "{\\"auths\\":{\\"${HARBOR_URL}\\":{\\"username\\":\\"${HARBOR_USERNAME}\\",\\"password\\":\\"${HARBOR_PASSWORD}\\"},\\"index.docker.io\\":{\\"auth\\":\\"YWRtaW46SGFyYm9yMTIzNDU=\\"}}}" > /kaniko/.docker/config.json
-                echo -n "{\\"auths\\":{\\"https://index.docker.io/v2/\\":{\\"auth\\":\\"\$(echo -n martinlourduswamy:Kandikuppam@123 | base64)\\"}}}" > /kaniko/.docker/config.json
+                echo -n "{\\"auths\\":{\\"https://index.docker.io/v1/\\":{\\"auth\\":\\"\$(echo -n martinlourduswamy:Kandikuppam@123 | base64)\\"}}}" > /kaniko/.docker/config.json
                 cat /kaniko/.docker/config.json
                 #/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=false --destination=${HARBOR_URL}/${HARBOR_PROJECT_NAME}/mag-tools:latest
                 /kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=false --destination=martinlourduswamy/mag-tools:latest
