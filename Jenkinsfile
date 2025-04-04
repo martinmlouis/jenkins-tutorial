@@ -65,9 +65,9 @@ spec:
     tty: true
     resources:
       requests:
-        memory: "2000Mi"
+        memory: "1000Mi"
       limits:
-        memory: "4000Mi"
+        memory: "3000Mi"
     env:
     - name: container
       value: "docker"
