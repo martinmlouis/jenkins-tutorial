@@ -7,7 +7,7 @@ RUN curl -sL https://aka.ms/InstallAzureCLIDeb |  bash
 
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys AA16FCBCA621E701 \
 && apt update \
-&& wget -O temp.gpg https://apt.releases.hashicorp.com/gpg \
+&& wget -O temp.gpg https://apt.releases.hashicorp.com/gpg jammy main \
 && gpg --dearmor temp.gpg \
 && tee /usr/share/keyrings/hashicorp-archive-keyring.gpg >/dev/null <temp.gpg \
 && rm temp.gpg \
