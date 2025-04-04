@@ -91,7 +91,7 @@ spec:
             withCredentials([usernamePassword(credentialsId: 'harbor-cred', usernameVariable: 'HARBOR_USERNAME', passwordVariable: 'HARBOR_PASSWORD')]) {
               sh """
                 #packer_version=\$(echo ${params.PACKER_VERSION} |cut -dv -f2)
-                echo "{\\"auths\\":{\\"${HARBOR_URL}\\":{\\"username\\":\\"${HARBOR_USERNAME}\\",\\"password\\":\\"${HARBOR_PASSWORD}\\"},\\"index.docker.io\\":{\\"username\\":\\"martinlourduswamy\\",\\"password\\":\\"Kandikuppam@123\\"}}}" > /kaniko/.docker/config.json
+                echo "{\\"auths\\":{\\"${HARBOR_URL}\\":{\\"username\\":\\"${HARBOR_USERNAME}\\",\\"password\\":\\"${HARBOR_PASSWORD}\\"},\\"https://index.docker.io/v1/\\":{\\"auth\\":\\"YWRtaW46SGFyYm9yMTIzNDU=\\"}}}" > /kaniko/.docker/config.json
                 cat /kaniko/.docker/config.json
                 /kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=false --destination=${HARBOR_URL}/${HARBOR_PROJECT_NAME}/mag-tools:latest
                 /kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=false --destination=docker.io/martinlourduswamy/mag-tools:latest
