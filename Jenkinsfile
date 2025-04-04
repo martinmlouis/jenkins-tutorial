@@ -59,7 +59,7 @@ spec:
   # For AWS CLI execution
   ###########################################################################################
   - name: kaniko
-    image: gcr.io/kaniko-project/executor:v1.20.1-slim
+    image: gcr.io/kaniko-project/executor:e328007bc1fa0d8c2eacf1918bebbabc923abafa-debug
     imagePullPolicy: Always
     command: ['cat']
     tty: true
