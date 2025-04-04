@@ -1,7 +1,7 @@
 FROM ubuntu
 
 RUN apt update \
-&& apt install curl gpg wget -y
+&& apt install curl gpg wget sudo -y
 
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb |  bash
 
